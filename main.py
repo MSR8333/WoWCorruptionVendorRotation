@@ -108,6 +108,8 @@ def show_all_corruptions():
         print(f'{x} ---------------- rotation: {get_rotation_number_from_corruption(x)} ---------------- Next available in: {check_next_rotation(x)}')
         last_used_name = x['Name']
     print('---------------------------------------')
+
+
 def show_all_rotation_dates():
     datetime_check = start_datetime
     rotation_time = datetime.timedelta(days=3, hours=12)
@@ -123,7 +125,6 @@ def show_all_rotation_dates():
 
         if x % 8 + 1 == 8:
             print('------------------------------------------------------------------------------------')
-
 
 
 def check_next_rotation(c):
@@ -145,10 +146,13 @@ def check_next_rotation(c):
         if i == x:
             # print(f'i == x : rotation {x+1} from: {start_dt_string} to: {end_dt_string}.')
             break
-    next_one = datetime_check - current_datetime
+    next_one = datetime_check - current_datetime - rotation_time
     next_one -= datetime.timedelta(microseconds=next_one.microseconds)
     if next_one < datetime.timedelta(seconds=1):
         next_one += rotation_time * 8
+
+    if next_one > datetime.timedelta(days=24, hours=12):
+        next_one = 'Currently in rotation.'
 
     return next_one
 
@@ -166,12 +170,13 @@ def get_rotation_number_from_corruption(corruption):
 
 def get_rotation_number_from_date():
     datetime_check = start_datetime
+    rotation_time = datetime.timedelta(days=3, hours=12)
     for x in range(len(all_rotations)):
         start_dt_string = datetime_check.strftime("%d/%m/%Y %H:%M:%S")
         # print("start date and time =", start_dt_string)
 
         start_date = datetime.datetime.strptime(start_dt_string, "%d/%m/%Y %H:%M:%S")
-        rotation_time = datetime.timedelta(days=3, hours=12)
+
         end_date = start_date + rotation_time
 
         end_dt_string = end_date.strftime("%d/%m/%Y %H:%M:%S")
