@@ -251,7 +251,7 @@ Sort by X:
 Otherwise search for a corruption's name\n------------------------------------------'''
 
 
-# show_current_rotation()
+show_current_rotation()
 print('------------------------------------------\n|Type help to see all available commands.|\n------------------------------------------')
 while True:
     user_input = input('\nWhat would you like to search for? ').lower().strip()
