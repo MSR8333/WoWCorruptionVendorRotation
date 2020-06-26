@@ -21,7 +21,7 @@ corruption = {}
 all_rotations = [rotation_1, rotation_2, rotation_3, rotation_4, rotation_5, rotation_6, rotation_7, rotation_8]
 all_corruptions = []
 
-start_datetime = datetime.datetime(year=2020, month=6, day=17, hour=8, minute=0, second=0)
+start_datetime = datetime.datetime(year=2020, month=6, day=17, hour=7, minute=0, second=0)
 current_datetime = datetime.datetime.now()
 
 rotation_time = datetime.timedelta(days=3, hours=12)
@@ -74,6 +74,8 @@ for row in range(worksheet.nrows):
                 corruption['Rank'] = (int(value))
             if col == 3:
                 corruption['Corruption Value'] = (int(value))
+            if col == 4:
+                corruption['Price'] = (int(value))
                 # appends copy of current corruption to list of corruptions
                 current_list.append(corruption.copy())
                 # print(corruption)
